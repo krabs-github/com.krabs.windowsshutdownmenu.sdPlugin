@@ -25,7 +25,7 @@
     ],
     "SDKVersion": 2,
     "Author": "Krabs",
-    "Category": "Krabs Tools",
+    "Category": "Krabs",
     "CategoryIcon": "resources/images/categoryIcon",
     "CodePath": "windowsshutdownmenu.html",
     "Description": "Displays the Windows Shutdown Menu Profile with options to shutdown, reboot, lock, or cancel shutdown.",
