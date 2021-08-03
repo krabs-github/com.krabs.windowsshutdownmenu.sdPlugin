@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>com.krabs.windowsshutdownmenu</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <script>
+            let websocket = null;
+            let pluginUUID = null;
+            let DestinationEnum = Object.freeze({ HARDWARE_AND_SOFTWARE: 0, HARDWARE_ONLY: 1, SOFTWARE_ONLY: 2 });
+            let krabsWindowsShutdownMenu = {
+                type: "com.krabs.windowsshutdownmenu.action",
+                onKeyDown: function (context, settings, coordinates, userDesiredState) {
+                    /* Code here will run when the key is pressed https://developer.elgato.com/documentation/stream-deck/sdk/events-received/#keydown */
+                },
+                onKeyUp: function (context, settings, coordinates, userDesiredState, device) {
+                    /* Code here will run when the key is released https://developer.elgato.com/documentation/stream-deck/sdk/events-received/#keyup */
+                    // krabsWindowsShutdownMenu.SetTitle(context, exampleText); // set title with the exampleText function below the 'onWillAppear' event
+                    SwitchProfile(device);
+                },
+                onWillAppear: function (context, settings, coordinates, device) {
+                    /* Code here will run when the Stream Deck application is opened, the user switches between profiles or when a user adds the action
+                        to their Stream Deck https://developer.elgato.com/documentation/stream-deck/sdk/events-received/#willappear
+                    */
+                },
+                SetTitle: function (context, exampleText) {
+                  /*let json = { event: "setTitle", context: context, payload: { title: "You\nPressed\nMe", target: DestinationEnum.HARDWARE_AND_SOFTWARE } };
+                  websocket.send(JSON.stringify(json));*/
+                },
+                SetSettings: function (context, settings) {
+                    let json = { event: "setSettings", context: context, payload: settings };
+                    websocket.send(JSON.stringify(json));
+                }
+            };
+
+            function SwitchProfile(device) {
+                var vjson = {
+                  'event': 'switchToProfile',
+                  'context': pluginUUID,
+                  'device': device,
+                  'payload': {
+                      'profile': "resources/profiles/Windows Shutdown Menu"
+                  }
+                };
+                websocket.send(JSON.stringify(vjson));
+                /*
+                console.log("SwitchProfile JSON ", vjson)
+                console.log("SwitchProfile pluginUUID ", pluginUUID)
+                console.log("SwitchProfile device ", device)
+                */
+            }
+
+            function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo) {
+                pluginUUID = inPluginUUID;
+                websocket = new WebSocket("ws://127.0.0.1:" + inPort);
+                function registerPlugin(inPluginUUID) {
+                    let json = { event: inRegisterEvent, uuid: inPluginUUID };
+                    websocket.send(JSON.stringify(json));
+                }
+                websocket.onopen = function () {
+                    registerPlugin(pluginUUID);
+                };
+                websocket.onmessage = function (evt) {
+                    let jsonObj = JSON.parse(evt.data);
+                    console.log("jsonobj: ", jsonObj)
+                    let event = jsonObj["event"];
+                    let action = jsonObj["action"];
+                    let context = jsonObj["context"];
+                    let device = jsonObj["device"];
+                    if (event == "keyDown") {
+                        let jsonPayload = jsonObj["payload"];
+                        let settings = jsonPayload["settings"];
+                        let coordinates = jsonPayload["coordinates"];
+                        let userDesiredState = jsonPayload["userDesiredState"];
+                        krabsWindowsShutdownMenu.onKeyDown(context, settings, coordinates, userDesiredState);
+                    } else if (event == "keyUp") {
+                        let jsonPayload = jsonObj["payload"];
+                        let settings = jsonPayload["settings"];
+                        let coordinates = jsonPayload["coordinates"];
+                        let userDesiredState = jsonPayload["userDesiredState"];
+                        krabsWindowsShutdownMenu.onKeyUp(context, settings, coordinates, userDesiredState, device);
+                    } else if (event == "willAppear") {
+                        let jsonPayload = jsonObj["payload"];
+                        let settings = jsonPayload["settings"];
+                        let coordinates = jsonPayload["coordinates"];
+                        krabsWindowsShutdownMenu.onWillAppear(context, settings, coordinates);
+                    }
+                };
+                websocket.onclose = function () {};
+            }
+        </script>
+    </body>
+</html>

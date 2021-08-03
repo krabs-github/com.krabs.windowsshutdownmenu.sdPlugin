@@ -1,0 +1,40 @@
+{
+    "Actions": [
+        {
+            "Icon": "resources/images/actionIcon",
+            "Name": "Windows Shutdown Menu",
+            "States": [
+                {
+                  "Image": "resources/images/actionDefaultImage",
+                  "TitleAlignment": "bottom",
+                  "FontSize": "12"
+                }
+              ],
+            "SupportedInMultiActions": false,
+            "Tooltip": "Displays the Windows Shutdown Menu Profile.",
+            "UUID": "com.krabs.windowsshutdownmenu.action"
+        }
+    ],
+    "Profiles": [
+        {
+          "Name": "resources/profiles/Windows Shutdown Menu",
+          "ReadOnly": true,
+          "DeviceType": 0,
+          "DontAutoSwitchWhenInstalled": true
+        }
+    ],
+    "SDKVersion": 2,
+    "Author": "Krabs",
+    "Category": "Krabs Tools",
+    "CategoryIcon": "resources/images/categoryIcon",
+    "CodePath": "windowsshutdownmenu.html",
+    "Description": "Displays the Windows Shutdown Menu Profile with options to shutdown, reboot, lock, or cancel shutdown.",
+    "Name": "Windows Shutdown Menu",
+    "Icon": "resources/images/pluginIcon",
+    "URL": "https://www.krabs.me/streamdeck-plugins",
+    "Version": "1.0.1",
+    "OS": [
+        { "Platform": "windows", "MinimumVersion": "10" }
+    ],
+    "Software": { "MinimumVersion": "5.0" }
+}
