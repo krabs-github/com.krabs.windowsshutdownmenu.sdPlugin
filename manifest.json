@@ -21,7 +21,13 @@
           "ReadOnly": true,
           "DeviceType": 0,
           "DontAutoSwitchWhenInstalled": true
-        }
+        },
+        {
+          "Name": "resources/profiles/Windows Shutdown Menu XL",
+          "ReadOnly": true,
+          "DeviceType": 2,
+          "DontAutoSwitchWhenInstalled": true
+        }        
     ],
     "SDKVersion": 2,
     "Author": "Krabs",

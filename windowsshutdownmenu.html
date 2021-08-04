@@ -40,19 +40,15 @@
                   'context': pluginUUID,
                   'device': device,
                   'payload': {
-                      'profile': "resources/profiles/Windows Shutdown Menu"
-                  }
+                      'profile': "resources/profiles/Windows Shutdown Menu",
+                  },
                 };
                 websocket.send(JSON.stringify(vjson));
-                /*
-                console.log("SwitchProfile JSON ", vjson)
-                console.log("SwitchProfile pluginUUID ", pluginUUID)
-                console.log("SwitchProfile device ", device)
-                */
             }
 
             function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo) {
                 pluginUUID = inPluginUUID;
+                var vDeviceTypeLookup_JSON = '{"Devices":[{"Device":"device","DeviceType":"devicetype"}]}';
                 websocket = new WebSocket("ws://127.0.0.1:" + inPort);
                 function registerPlugin(inPluginUUID) {
                     let json = { event: inRegisterEvent, uuid: inPluginUUID };
@@ -63,11 +59,19 @@
                 };
                 websocket.onmessage = function (evt) {
                     let jsonObj = JSON.parse(evt.data);
-                    console.log("jsonobj: ", jsonObj)
                     let event = jsonObj["event"];
                     let action = jsonObj["action"];
                     let context = jsonObj["context"];
                     let device = jsonObj["device"];
+                    if ( jsonObj["deviceInfo"] != null )
+                        {
+                          let devicetype = jsonObj["deviceInfo"].type
+                          var vDeviceTypeLookup_OBJ = JSON.parse(vDeviceTypeLookup_JSON);
+                          vDeviceTypeLookup_OBJ['Devices'].push({"Device":device, "DeviceType":devicetype});
+                          vDeviceTypeLookup_JSON = JSON.stringify(vDeviceTypeLookup_OBJ);
+                          console.log("new json: ", vDeviceTypeLookup_JSON)
+
+                        }
                     if (event == "keyDown") {
                         let jsonPayload = jsonObj["payload"];
                         let settings = jsonPayload["settings"];
