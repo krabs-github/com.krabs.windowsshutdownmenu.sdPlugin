@@ -14,10 +14,10 @@
                 onKeyDown: function (context, settings, coordinates, userDesiredState) {
                     /* Code here will run when the key is pressed https://developer.elgato.com/documentation/stream-deck/sdk/events-received/#keydown */
                 },
-                onKeyUp: function (context, settings, coordinates, userDesiredState, device) {
+                onKeyUp: function (context, settings, coordinates, userDesiredState, device, vDeviceTypeLookup_JSON) {
                     /* Code here will run when the key is released https://developer.elgato.com/documentation/stream-deck/sdk/events-received/#keyup */
                     // krabsWindowsShutdownMenu.SetTitle(context, exampleText); // set title with the exampleText function below the 'onWillAppear' event
-                    SwitchProfile(device);
+                    SwitchProfile(device, vDeviceTypeLookup_JSON);
                 },
                 onWillAppear: function (context, settings, coordinates, device) {
                     /* Code here will run when the Stream Deck application is opened, the user switches between profiles or when a user adds the action
@@ -34,16 +34,34 @@
                 }
             };
 
-            function SwitchProfile(device) {
-                var vjson = {
-                  'event': 'switchToProfile',
-                  'context': pluginUUID,
-                  'device': device,
-                  'payload': {
-                      'profile': "resources/profiles/Windows Shutdown Menu",
-                  },
-                };
-                websocket.send(JSON.stringify(vjson));
+            function SwitchProfile(device, vDeviceTypeLookup_JSON) {
+              vDeviceTypeLookup_OBJ = JSON.parse(vDeviceTypeLookup_JSON);
+              const u = vDeviceTypeLookup_OBJ;
+              for(const vItem in u.Devices) {
+                var vDevice = u.Devices[vItem].Device
+                var vDeviceType = u.Devices[vItem].DeviceType
+                  if ( vDevice === device && vDeviceType === 0 ) {
+                  var vjson = {
+                    'event': 'switchToProfile',
+                    'context': pluginUUID,
+                    'device': device,
+                    'payload': {
+                        'profile': "resources/profiles/Windows Shutdown Menu",
+                      },
+                    };
+                    websocket.send(JSON.stringify(vjson));
+                  } else if ( vDevice === device && vDeviceType === 2 ) {
+                  var vjson = {
+                    'event': 'switchToProfile',
+                    'context': pluginUUID,
+                    'device': device,
+                    'payload': {
+                        'profile': "resources/profiles/Windows Shutdown Menu XL",
+                      },
+                    };
+                    websocket.send(JSON.stringify(vjson));
+                  }
+              }
             }
 
             function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo) {
@@ -69,8 +87,6 @@
                           var vDeviceTypeLookup_OBJ = JSON.parse(vDeviceTypeLookup_JSON);
                           vDeviceTypeLookup_OBJ['Devices'].push({"Device":device, "DeviceType":devicetype});
                           vDeviceTypeLookup_JSON = JSON.stringify(vDeviceTypeLookup_OBJ);
-                          console.log("new json: ", vDeviceTypeLookup_JSON)
-
                         }
                     if (event == "keyDown") {
                         let jsonPayload = jsonObj["payload"];
@@ -83,7 +99,7 @@
                         let settings = jsonPayload["settings"];
                         let coordinates = jsonPayload["coordinates"];
                         let userDesiredState = jsonPayload["userDesiredState"];
-                        krabsWindowsShutdownMenu.onKeyUp(context, settings, coordinates, userDesiredState, device);
+                        krabsWindowsShutdownMenu.onKeyUp(context, settings, coordinates, userDesiredState, device, vDeviceTypeLookup_JSON);
                     } else if (event == "willAppear") {
                         let jsonPayload = jsonObj["payload"];
                         let settings = jsonPayload["settings"];
