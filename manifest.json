@@ -27,7 +27,7 @@
           "ReadOnly": true,
           "DeviceType": 2,
           "DontAutoSwitchWhenInstalled": true
-        }        
+        }
     ],
     "SDKVersion": 2,
     "Author": "Krabs",
