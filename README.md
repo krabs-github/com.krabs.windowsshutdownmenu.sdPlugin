@@ -1,5 +1,5 @@
 com.krabs.discordmemberstatus.sdPlugin
-# Streamdeck Discord Member Status
+# Streamdeck Windows Shutdown Menu
  
 ![Image](https://i.postimg.cc/MHG8FT67/Windows-Shutdown-Menu.png)
 
