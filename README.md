@@ -1,4 +1,4 @@
-com.krabs.discordmemberstatus.sdPlugin
+com.krabs.windowsshutdownmenu.sdPlugin
 # Streamdeck Windows Shutdown Menu
  
 ![Image](https://i.postimg.cc/MHG8FT67/Windows-Shutdown-Menu.png)
