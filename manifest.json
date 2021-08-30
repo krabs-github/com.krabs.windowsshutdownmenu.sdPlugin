@@ -39,7 +39,7 @@
     "Name": "Windows Shutdown Menu",
     "Icon": "resources/images/pluginIcon",
     "URL": "https://www.krabs.me/streamdeck-plugins",
-    "Version": "1.0.7",
+    "Version": "1.0.8",
     "OS": [
         { "Platform": "windows", "MinimumVersion": "10" }
     ],
