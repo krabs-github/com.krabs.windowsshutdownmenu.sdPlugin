@@ -31,7 +31,7 @@
     ],
     "SDKVersion": 2,
     "Author": "Krabs",
-    "Category": "Krabs - Streamdeck Labs",
+    "Category": "Krabs - Stream Deck Labs",
     "CategoryIcon": "resources/images/categoryIcon",
     "CodePath": "windowsshutdownmenu.html",
     "PropertyInspectorPath": "windowsshutdownmenu_pi.html",
