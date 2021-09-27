@@ -1,7 +1,7 @@
 com.krabs.windowsshutdownmenu.sdPlugin
 # Streamdeck Windows Shutdown Menu
  
-![Image](https://i.postimg.cc/SRc3kHmc/Windows-Shutdown-Menu-black.png)
+![Image](https://lh4.googleusercontent.com/9iF9L83EI1wTOtuTrWZ656jzMCrjFMwQpJx3qloXSKnQ8UMLfXyg8IxiVYzabH5auiTac3SW8XtFb3-ncDR-oms=w1280)
 
  Displays the Windows Shutdown Menu Profile with options to shutdown, reboot, lock, or cancel shutdown.
  Plugin includes the Windows Shutdown Menu profile.
