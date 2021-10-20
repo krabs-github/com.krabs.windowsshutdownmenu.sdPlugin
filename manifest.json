@@ -27,6 +27,12 @@
           "ReadOnly": true,
           "DeviceType": 2,
           "DontAutoSwitchWhenInstalled": true
+        },
+        {
+          "Name": "resources/profiles/Windows Shutdown Menu Mini",
+          "ReadOnly": true,
+          "DeviceType": 1,
+          "DontAutoSwitchWhenInstalled": true
         }
     ],
     "SDKVersion": 2,
@@ -39,7 +45,7 @@
     "Name": "Windows Shutdown Menu",
     "Icon": "resources/images/pluginIcon",
     "URL": "https://www.krabs.me/streamdeck-plugins",
-    "Version": "1.0.10",
+    "Version": "1.0.11",
     "OS": [
         { "Platform": "windows", "MinimumVersion": "10" }
     ],
