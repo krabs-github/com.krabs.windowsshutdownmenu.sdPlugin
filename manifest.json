@@ -18,19 +18,19 @@
     "Profiles": [
         {
           "Name": "resources/profiles/Windows Shutdown Menu",
-          "ReadOnly": true,
+          "ReadOnly": false,
           "DeviceType": 0,
           "DontAutoSwitchWhenInstalled": true
         },
         {
           "Name": "resources/profiles/Windows Shutdown Menu XL",
-          "ReadOnly": true,
+          "ReadOnly": false,
           "DeviceType": 2,
           "DontAutoSwitchWhenInstalled": true
         },
         {
           "Name": "resources/profiles/Windows Shutdown Menu Mini",
-          "ReadOnly": true,
+          "ReadOnly": false,
           "DeviceType": 1,
           "DontAutoSwitchWhenInstalled": true
         }
@@ -45,7 +45,7 @@
     "Name": "Windows Shutdown Menu",
     "Icon": "resources/images/pluginIcon",
     "URL": "https://www.krabs.me/streamdeck-plugins",
-    "Version": "1.0.11",
+    "Version": "1.0.12",
     "OS": [
         { "Platform": "windows", "MinimumVersion": "10" }
     ],
