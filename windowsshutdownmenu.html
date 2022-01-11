@@ -60,8 +60,7 @@
                       },
                     };
                     websocket.send(JSON.stringify(vjson));
-                  }
-                  else if ( vDevice === device && vDeviceType === 1 ) {
+                  } else if ( vDevice === device && vDeviceType === 1 ) {
                   var vjson = {
                     'event': 'switchToProfile',
                     'context': pluginUUID,
